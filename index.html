@@ -66,26 +66,29 @@ h1 {
     border: 3px solid transparent;
     display: flex;
     flex-direction: column;
+    min-height: 0; /* Επιτρέπει στην κάρτα να συρρικνώνεται */
 }
-
-.card:hover { border-color: var(--primary); }
 
 .card img { 
     width: 100%; 
-    flex: 1; /* Η εικόνα τώρα "ρουφάει" όλο τον διαθέσιμο χώρο */
-    object-fit: cover;
-    min-height: 0; /* Απαραίτητο για να δουλέψει το flex:1 σωστά σε μερικούς browsers */
+    flex: 1; 
+    /* ΑΛΛΑΓΗ ΕΔΩ: contain αντί για cover */
+    object-fit: contain; 
+    /* Προσθέτουμε ένα background για να μην φαίνεται άσχημο το κενό */
+    background-color: #f9f9f9;
+    min-height: 0;
 }
 
 .card h2 { 
     margin: 0; 
     color: var(--dark); 
-    font-size: 1.2rem;
-    padding: 12px 0; /* Συγκεκριμένο padding για να είναι "μία γραμμή" */
+    font-size: 1.1rem;
+    padding: 10px 5px;
     background: #fff;
-    white-space: nowrap; /* Εξασφαλίζει ότι το όνομα μένει σε μια γραμμή */
+    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Αν το όνομα είναι τεράστιο, βάζει αποσιωπητικά */
+    text-overflow: ellipsis;
+    border-top: 1px solid #eee; /* Μια λεπτή γραμμή για να ξεχωρίζει το όνομα */
 }
 
         /* Results Styles */
@@ -203,7 +206,7 @@ h1 {
             { name: "Αγγελόγιαννος", img: "images/kasponti.png" },
             { name: "Μπρωκ", img: "images/brwk.jpg" },
             { name: "Folie", img: "images/folie.jpg" },
-            { name: "Τάσος", img: "images/tasos2.png" },
+            { name: "Τάσος", img: "images/tasos.JPG" },
             { name: "Πέτρος", img: "images/pedrunk.jpg" },
             { name: "Αστέρης", img: "images/aster.jpg" },
             { name: "Κύπριος", img: "images/kip2.jpg" },
