@@ -6,110 +6,107 @@
     <title>Palermo List 123</title>
     <style>
         :root {
-    --primary: #3498db;
-    --secondary: #2ecc71;
-    --dark: #2c3e50;
-    --light: #ecf0f1;
-}
+            --primary: #3498db;
+            --pink: #e91e63;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+        }
 
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: var(--light);
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto; 
-    overflow-x: hidden;
-}
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--light);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
 
-h1 { 
-    color: var(--dark); 
-    text-align: center; 
-    margin: 15px 0;
-    font-size: 1.4rem;
-    padding: 0 10px;
-}
+        h1 { 
+            color: var(--dark); 
+            text-align: center; 
+            margin: 15px 0;
+            font-size: 1.4rem;
+        }
 
-.comparison-container {
-    display: flex;
-    gap: 15px;
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    flex: 1;
-    justify-content: center;
-    align-items: flex-start; /* Αλλαγή από stretch για να μην τις αναγκάζει να τεντώνουν */
-    padding: 15px;
-    box-sizing: border-box;
-}
+        /* Menu Styles */
+        #menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            gap: 20px;
+        }
 
-/* Ρυθμίσεις για κινητά */
-@media (max-width: 600px) {
-    .comparison-container { 
-        flex-direction: column; 
-        align-items: center;
-    }
+        .menu-btn {
+            width: 250px;
+            padding: 25px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            color: white;
+        }
 
-    .card {
-        /* Στο κινητό δίνουμε ένα σταθερό ελάχιστο ύψος για να φαίνονται καλά οι φωτό */
-        min-height: 45vh; 
-        width: 100% !important;
-    }
-}
+        .btn-boys { background-color: var(--primary); }
+        .btn-girls { background-color: var(--pink); }
+        .menu-btn:hover { transform: scale(1.05); opacity: 0.9; }
 
-.card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    flex: 1;
-    width: 50%;
-    max-width: 450px;
-    cursor: pointer;
-    transition: transform 0.2s;
-    overflow: hidden;
-    text-align: center;
-    border: 4px solid transparent;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-}
+        /* Game UI Styles */
+        .comparison-container {
+            display: none; /* Κρυφό μέχρι να γίνει επιλογή */
+            gap: 15px;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            flex: 1;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 15px;
+            box-sizing: border-box;
+        }
 
-.card:hover { border-color: var(--primary); }
+        @media (max-width: 600px) {
+            .comparison-container { flex-direction: column; align-items: center; }
+            .card { min-height: 45vh; width: 100% !important; }
+        }
 
-.card img { 
-    width: 100%; 
-    flex-grow: 1; /* Η εικόνα παίρνει όλο τον διαθέσιμο χώρο */
-    object-fit: contain; 
-    background-color: #fcfcfc;
-    min-height: 200px; /* Ελάχιστο ύψος εικόνας */
-}
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            flex: 1;
+            width: 50%;
+            max-width: 450px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            overflow: hidden;
+            text-align: center;
+            border: 4px solid transparent;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
 
-.card h2 { 
-    margin: 0; 
-    color: var(--dark); 
-    font-size: 1.2rem;
-    padding: 15px 5px;
-    background: #fff;
-    border-top: 1px solid #eee;
-}
+        .card:hover { border-color: var(--primary); }
+        .card img { width: 100%; flex-grow: 1; object-fit: contain; background-color: #fcfcfc; min-height: 200px; }
+        .card h2 { margin: 0; color: var(--dark); font-size: 1.2rem; padding: 15px 5px; background: #fff; border-top: 1px solid #eee; }
 
         /* Results Styles */
         #results {
             display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            margin: 20px auto;
             width: 90%;
             max-width: 450px;
             background: white;
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            max-height: 85vh;
-            overflow-y: auto;
         }
 
         .section-title {
@@ -121,76 +118,43 @@ h1 {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 1rem;
         }
 
-        .result-item {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            align-items: center;
-        }
-
-        .rank-number {
-            font-weight: bold;
-            margin-right: 15px;
-            color: var(--primary);
-            min-width: 25px;
-        }
-
-        button.copy-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-
-        button.copy-btn:active { transform: scale(0.95); }
-
-        .show-more-btn {
-            background: none;
-            border: 1px solid var(--dark);
-            color: var(--dark);
-            width: 100%;
-            padding: 10px;
-            margin-top: 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
+        .result-item { padding: 10px; border-bottom: 1px solid #eee; display: flex; align-items: center; }
+        .rank-number { font-weight: bold; margin-right: 15px; color: var(--primary); min-width: 25px; }
+        .copy-btn { background: var(--primary); color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+        .show-more-btn { background: none; border: 1px solid var(--dark); color: var(--dark); width: 100%; padding: 10px; margin-top: 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
         .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-    <h1 id="question">Would you rather;</h1>
+    <h1 id="main-title">Character Ranker</h1>
+
+    <div id="menu">
+        <button class="menu-btn btn-boys" onclick="initGame('boys')">Αγόρια</button>
+        <button class="menu-btn btn-girls" onclick="initGame('girls')">Κορίτσια</button>
+    </div>
 
     <div id="game-ui" class="comparison-container">
         <div class="card" onclick="makeChoice(0)">
-            <img id="img0" src="images/default.jpg" alt="Char 1">
+            <img id="img0" src="images/default.jpg" alt="">
             <h2 id="name0">...</h2>
         </div>
         <div class="card" onclick="makeChoice(1)">
-            <img id="img1" src="images/default.jpg" alt="Char 2">
+            <img id="img1" src="images/default.jpg" alt="">
             <h2 id="name1">...</h2>
         </div>
     </div>
 
     <div id="results">
         <h2 style="text-align:center; margin-top:0;">Αποτελέσματα</h2>
-        
         <div class="section-title">
             🏆 MY TOP 5
             <button class="copy-btn" onclick="copyList('top5')">Copy</button>
         </div>
         <div id="top5-list"></div>
-
         <button id="btn-show-all" class="show-more-btn" onclick="toggleFullList()">Show Complete List</button>
-
         <div id="full-list-container" class="hidden">
             <div class="section-title">
                 📜 Πλήρης Λίστα
@@ -198,47 +162,67 @@ h1 {
             </div>
             <div id="full-list"></div>
         </div>
-
-        <button onclick="location.reload()" style="margin-top:25px; padding:10px; width:100%; border:none; background:#ccc; border-radius:8px; cursor:pointer;">Νέα Ταξινόμηση</button>
+        <button onclick="location.reload()" style="margin-top:25px; padding:10px; width:100%; border:none; background:#ccc; border-radius:8px; cursor:pointer;">Επιστροφή στο Menu</button>
     </div>
 
     <script>
-        const characters = [
-            { name: "Πασχάλης", img: "images/broskigator.jpg" },
-            { name: "Δοξάκης", img: "images/dox.jpg" },
-            { name: "Lazer", img: "images/laz16.jpg" },
-            { name: "Αγγελόγιαννος", img: "images/kasponti.png" },
-            { name: "Μπρωκ", img: "images/brwk.jpg" },
-            { name: "Folie", img: "images/folie.jpg" },
-            { name: "Τάσος", img: "images/tasos.JPG" },
-            { name: "Πέτρος", img: "images/pedrunk.jpg" },
-            { name: "Αστέρης", img: "images/aster.jpg" },
-            { name: "Κύπριος", img: "images/kip2.jpg" },
-            { name: "Otto", img: "images/otto.jpg" },
-            { name: "Σούκου", img: "images/soukou2.jpg" },
-            { name: "Stepup", img: "images/stepup.jpg" },
-            { name: "Πάνος", img: "images/panos2.jpg" },
-            { name: "TheoC", img: "images/theoc.jpg" },
-            { name: "Τζουμ", img: "images/tzoum2.jpg" },
-            { name: "Ζαφειράκλας", img: "images/zaf.jpg" }
-        ];
+        
+        const data = {
+            boys: [
+                { name: "Πασχάλης", img: "images/broskigator.jpg" },
+                { name: "Δοξάκης", img: "images/dox.jpg" },
+                { name: "Lazer", img: "images/laz16.jpg" },
+                { name: "Αγγελόγιαννος", img: "images/kasponti.png" },
+                { name: "Μπρωκ", img: "images/brwk.jpg" },
+                { name: "Folie", img: "images/folie.jpg" },
+                { name: "Τάσος", img: "images/tasos.JPG" },
+                { name: "Πέτρος", img: "images/pedrunk.jpg" },
+                { name: "Αστέρης", img: "images/aster.jpg" },
+                { name: "Κύπριος", img: "images/kip2.jpg" },
+                { name: "Otto", img: "images/otto.jpg" },
+                { name: "Σούκου", img: "images/soukou2.jpg" },
+                { name: "Stepup", img: "images/stepup.jpg" },
+                { name: "Πάνος", img: "images/panos2.jpg" },
+                { name: "TheoC", img: "images/theoc.jpg" },
+                { name: "Τζουμ", img: "images/tzoum2.jpg" },
+                { name: "Ζαφειράκλας", img: "images/zaf.jpg" }
+                ],
+            girls: [
+                { name: "Ηλιάνα", img: "images/iliana.jpg" },
+                { name: "Σταυρούλα", img: "images/skywalker.png" },
+                { name: "Πέννυ", img: "images/penny.jpg" },
+                { name: "Έλένη Κατερίνα", img: "images/elka.jpg" },
+                { name: "Κατερίνα", img: "images/katerinamama.jpg" },
+                { name: "Έμιλυ", img: "images/yuku.jpg" },
+                { name: "Βασιλική", img: "images/morgana.jpg" },
+                { name: "Ελευθερία", img: "images/riaki.jpg" },
+                { name: "Αμαλία", img: "images/amalia.jpg" },
+                { name: "Ιωάννα", img: "images/terzi.jpg" }
+            ]
+        };
 
+        let currentPool = []; 
         let sortedList = [];
         let currentIndex = 1;
         let left = 0, right = 0, mid = 0;
 
-        function start() {
-            sortedList.push(characters[0]);
+        function initGame(category) {
+            currentPool = data[category];
+            document.getElementById('menu').classList.add('hidden');
+            document.getElementById('game-ui').style.display = 'flex';
+            document.getElementById('main-title').innerText = "Would you rather;";
+            
+            sortedList.push(currentPool[0]);
             setupNextComparison();
         }
 
         function setupNextComparison() {
-            if (currentIndex >= characters.length) {
+            if (currentIndex >= currentPool.length) {
                 showResults();
                 return;
             }
             if (left > right) {
-                sortedList.splice(left, 0, characters[currentIndex]);
+                sortedList.splice(left, 0, currentPool[currentIndex]);
                 currentIndex++;
                 left = 0;
                 right = sortedList.length - 1;
@@ -246,7 +230,7 @@ h1 {
                 return;
             }
             mid = Math.floor((left + right) / 2);
-            updateUI(characters[currentIndex], sortedList[mid]);
+            updateUI(currentPool[currentIndex], sortedList[mid]);
         }
 
         function updateUI(charA, charB) {
@@ -264,7 +248,7 @@ h1 {
 
         function showResults() {
             document.getElementById('game-ui').classList.add('hidden');
-            document.getElementById('question').innerText = "Η Κατάταξή σου!";
+            document.getElementById('main-title').innerText = "Τέλος!";
             document.getElementById('results').style.display = 'block';
 
             const top5Div = document.getElementById('top5-list');
@@ -276,7 +260,6 @@ h1 {
                         <span class="rank-number">#${index + 1}</span>
                         <span>${char.name}</span>
                     </div>`;
-                
                 if (index < 5) top5Div.innerHTML += itemHtml;
                 fullDiv.innerHTML += itemHtml;
             });
@@ -288,18 +271,10 @@ h1 {
         }
 
         function copyList(type) {
-            let text = "";
             const listToCopy = type === 'top5' ? sortedList.slice(0, 5) : sortedList;
-            const title = type === 'top5' ? "--- MY TOP 5 ---" : "--- FULL LIST ---";
-            
-            text = title + "\n" + listToCopy.map((c, i) => `${i + 1}. ${c.name}`).join("\n");
-
-            navigator.clipboard.writeText(text).then(() => {
-                alert("Αντιγράφηκε στο πρόχειρο!");
-            });
+            const text = listToCopy.map((c, i) => `${i + 1}. ${c.name}`).join("\n");
+            navigator.clipboard.writeText(text).then(() => alert("Αντιγράφηκε!"));
         }
-
-        start();
     </script>
 </body>
 </html>
