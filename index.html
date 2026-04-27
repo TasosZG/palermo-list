@@ -6,68 +6,87 @@
     <title>Character Ranker</title>
     <style>
         :root {
-            --primary: #3498db;
-            --secondary: #2ecc71;
-            --dark: #2c3e50;
-            --light: #ecf0f1;
-            --accent: #e67e22;
-        }
+    --primary: #3498db;
+    --secondary: #2ecc71;
+    --dark: #2c3e50;
+    --light: #ecf0f1;
+    --accent: #e67e22;
+}
 
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--light);
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--light);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
 
-        h1 { 
-            color: var(--dark); 
-            text-align: center; 
-            margin: 10px 0;
-            font-size: 1.5rem;
-            height: 8vh;
-        }
+h1 { 
+    color: var(--dark); 
+    text-align: center; 
+    margin: 5px 0;
+    font-size: 1.2rem;
+    height: 5vh; /* Μικρότερο ύψος για τον τίτλο */
+}
 
-        .comparison-container {
-            display: flex;
-            gap: 15px;
-            width: 100%;
-            flex: 1;
-            justify-content: center;
-            align-items: stretch;
-            padding: 10px;
-            box-sizing: border-box;
-        }
+.comparison-container {
+    display: flex;
+    gap: 10px; /* Μικρότερο κενό */
+    width: 100%;
+    flex: 1;
+    justify-content: center;
+    align-items: stretch;
+    padding: 10px;
+    box-sizing: border-box;
+}
 
-        @media (max-width: 600px) {
-            .comparison-container { flex-direction: column; }
-            .card img { height: 55% !important; }
-        }
+@media (max-width: 600px) {
+    .comparison-container { 
+        flex-direction: column; 
+    }
+    .card h2 {
+        font-size: 1rem !important;
+        padding: 8px 0 !important;
+    }
+}
 
-        .card {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            flex: 1;
-            max-width: 500px;
-            cursor: pointer;
-            transition: transform 0.2s;
-            overflow: hidden;
-            text-align: center;
-            border: 4px solid transparent;
-            display: flex;
-            flex-direction: column;
-        }
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    flex: 1;
+    max-width: 500px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    overflow: hidden;
+    text-align: center;
+    border: 3px solid transparent;
+    display: flex;
+    flex-direction: column;
+}
 
-        .card:hover { transform: scale(1.02); border-color: var(--primary); }
+.card:hover { border-color: var(--primary); }
 
-        .card img { width: 100%; height: 75%; object-fit: cover; }
+.card img { 
+    width: 100%; 
+    flex: 1; /* Η εικόνα τώρα "ρουφάει" όλο τον διαθέσιμο χώρο */
+    object-fit: cover;
+    min-height: 0; /* Απαραίτητο για να δουλέψει το flex:1 σωστά σε μερικούς browsers */
+}
 
-        .card h2 { margin: auto; color: var(--dark); font-size: 1.2rem; padding: 5px; }
+.card h2 { 
+    margin: 0; 
+    color: var(--dark); 
+    font-size: 1.2rem;
+    padding: 12px 0; /* Συγκεκριμένο padding για να είναι "μία γραμμή" */
+    background: #fff;
+    white-space: nowrap; /* Εξασφαλίζει ότι το όνομα μένει σε μια γραμμή */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Αν το όνομα είναι τεράστιο, βάζει αποσιωπητικά */
+}
 
         /* Results Styles */
         #results {
