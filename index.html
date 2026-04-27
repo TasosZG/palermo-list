@@ -10,7 +10,6 @@
     --secondary: #2ecc71;
     --dark: #2c3e50;
     --light: #ecf0f1;
-    --accent: #e67e22;
 }
 
 body {
@@ -18,77 +17,82 @@ body {
     background-color: var(--light);
     margin: 0;
     padding: 0;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow-y: auto; 
+    overflow-x: hidden;
 }
 
 h1 { 
     color: var(--dark); 
     text-align: center; 
-    margin: 5px 0;
-    font-size: 1.2rem;
-    height: 5vh; /* Μικρότερο ύψος για τον τίτλο */
+    margin: 15px 0;
+    font-size: 1.4rem;
+    padding: 0 10px;
 }
 
 .comparison-container {
     display: flex;
-    gap: 10px; /* Μικρότερο κενό */
+    gap: 15px;
     width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
     flex: 1;
     justify-content: center;
-    align-items: stretch;
-    padding: 10px;
+    align-items: flex-start; /* Αλλαγή από stretch για να μην τις αναγκάζει να τεντώνουν */
+    padding: 15px;
     box-sizing: border-box;
 }
 
+/* Ρυθμίσεις για κινητά */
 @media (max-width: 600px) {
     .comparison-container { 
         flex-direction: column; 
+        align-items: center;
     }
-    .card h2 {
-        font-size: 1rem !important;
-        padding: 8px 0 !important;
+
+    .card {
+        /* Στο κινητό δίνουμε ένα σταθερό ελάχιστο ύψος για να φαίνονται καλά οι φωτό */
+        min-height: 45vh; 
+        width: 100% !important;
     }
 }
 
 .card {
     background: white;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     flex: 1;
-    max-width: 500px;
+    width: 50%;
+    max-width: 450px;
     cursor: pointer;
     transition: transform 0.2s;
     overflow: hidden;
     text-align: center;
-    border: 3px solid transparent;
+    border: 4px solid transparent;
     display: flex;
     flex-direction: column;
-    min-height: 0; /* Επιτρέπει στην κάρτα να συρρικνώνεται */
+    margin-bottom: 10px;
 }
+
+.card:hover { border-color: var(--primary); }
 
 .card img { 
     width: 100%; 
-    flex: 1; 
-    /* ΑΛΛΑΓΗ ΕΔΩ: contain αντί για cover */
+    flex-grow: 1; /* Η εικόνα παίρνει όλο τον διαθέσιμο χώρο */
     object-fit: contain; 
-    /* Προσθέτουμε ένα background για να μην φαίνεται άσχημο το κενό */
-    background-color: #f9f9f9;
-    min-height: 0;
+    background-color: #fcfcfc;
+    min-height: 200px; /* Ελάχιστο ύψος εικόνας */
 }
 
 .card h2 { 
     margin: 0; 
     color: var(--dark); 
-    font-size: 1.1rem;
-    padding: 10px 5px;
+    font-size: 1.2rem;
+    padding: 15px 5px;
     background: #fff;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    border-top: 1px solid #eee; /* Μια λεπτή γραμμή για να ξεχωρίζει το όνομα */
+    border-top: 1px solid #eee;
 }
 
         /* Results Styles */
