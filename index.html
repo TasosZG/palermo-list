@@ -6,110 +6,137 @@
     <title>Character Ranker</title>
     <style>
         :root {
-    --primary: #3498db;
-    --secondary: #2ecc71;
-    --dark: #2c3e50;
-    --light: #ecf0f1;
-}
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e67e22;
+        }
 
-/* Κάνουμε το body να μην επιτρέπει scroll και να πιάνει όλη την οθόνη */
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: var(--light);
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden; /* Εμποδίζει το scroll */
-}
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--light);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
 
-h1 { 
-    color: var(--dark); 
-    text-align: center; 
-    margin: 10px 0;
-    font-size: 1.5rem;
-    height: 10vh; /* Πιάνει το 10% του ύψους */
-}
+        h1 { 
+            color: var(--dark); 
+            text-align: center; 
+            margin: 10px 0;
+            font-size: 1.5rem;
+            height: 8vh;
+        }
 
-/* Το container των καρτών πιάνει το υπόλοιπο 90% του ύψους */
-.comparison-container {
-    display: flex;
-    gap: 15px;
-    width: 100%;
-    flex: 1;
-    justify-content: center;
-    align-items: stretch; /* Τεντώνει τις κάρτες για να γεμίσουν το ύψος */
-    padding: 10px;
-    box-sizing: border-box;
-}
+        .comparison-container {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            flex: 1;
+            justify-content: center;
+            align-items: stretch;
+            padding: 10px;
+            box-sizing: border-box;
+        }
 
-/* Ρυθμίσεις για κινητά: Κάθετη διάταξη */
-@media (max-width: 600px) {
-    .comparison-container { 
-        flex-direction: column; 
-    }
-    .card img {
-        height: 60% !important; /* Μειώνουμε λίγο την εικόνα για να χωράει το κείμενο */
-    }
-}
+        @media (max-width: 600px) {
+            .comparison-container { flex-direction: column; }
+            .card img { height: 55% !important; }
+        }
 
-.card {
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    flex: 1; /* Μοιράζονται τον χώρο ίσα */
-    max-width: 500px;
-    cursor: pointer;
-    transition: transform 0.2s;
-    overflow: hidden;
-    text-align: center;
-    border: 4px solid transparent;
-    display: flex;
-    flex-direction: column;
-}
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            flex: 1;
+            max-width: 500px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            overflow: hidden;
+            text-align: center;
+            border: 4px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
 
-.card:hover {
-    transform: scale(1.02);
-    border-color: var(--primary);
-}
+        .card:hover { transform: scale(1.02); border-color: var(--primary); }
 
-.card img {
-    width: 100%;
-    height: 75%; /* Η εικόνα παίρνει το μεγαλύτερο μέρος */
-    object-fit: cover;
-}
+        .card img { width: 100%; height: 75%; object-fit: cover; }
 
-.card h2 { 
-    margin: auto; /* Κεντράρει το όνομα στον εναπομείναντα χώρο */
-    color: var(--dark);
-    font-size: 1.2rem;
-    padding: 5px;
-}
+        .card h2 { margin: auto; color: var(--dark); font-size: 1.2rem; padding: 5px; }
 
-#results {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 500px;
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    max-height: 80vh;
-    overflow-y: auto; /* Μόνο το αποτέλεσμα κάνει scroll αν είναι μεγάλο */
-}
+        /* Results Styles */
+        #results {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 450px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
 
-.result-item {
-    padding: 12px;
-    border-bottom: 1px solid #eee;
-    font-size: 1.1rem;
-}
+        .section-title {
+            background: var(--dark);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1rem;
+        }
 
-.hidden { display: none !important; }
+        .result-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .rank-number {
+            font-weight: bold;
+            margin-right: 15px;
+            color: var(--primary);
+            min-width: 25px;
+        }
+
+        button.copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        button.copy-btn:active { transform: scale(0.95); }
+
+        .show-more-btn {
+            background: none;
+            border: 1px solid var(--dark);
+            color: var(--dark);
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
@@ -118,27 +145,41 @@ h1 {
 
     <div id="game-ui" class="comparison-container">
         <div class="card" onclick="makeChoice(0)">
-            <img id="img0" src="images/default.jpg" alt="Character 1">
-            <h2 id="name0">Όνομα 1</h2>
+            <img id="img0" src="images/default.jpg" alt="Char 1">
+            <h2 id="name0">...</h2>
         </div>
-        
         <div class="card" onclick="makeChoice(1)">
-            <img id="img1" src="images/default.jpg" alt="Character 2">
-            <h2 id="name1">Όνομα 2</h2>
+            <img id="img1" src="images/default.jpg" alt="Char 2">
+            <h2 id="name1">...</h2>
         </div>
     </div>
 
     <div id="results">
-        <h2>Η Κατάταξή σου:</h2>
-        <div id="list-container"></div>
-        <button onclick="location.reload()" style="margin-top:20px; padding:10px; width:100%;">Επανεκκίνηση</button>
+        <h2 style="text-align:center; margin-top:0;">Αποτελέσματα</h2>
+        
+        <div class="section-title">
+            🏆 MY TOP 5
+            <button class="copy-btn" onclick="copyList('top5')">Copy</button>
+        </div>
+        <div id="top5-list"></div>
+
+        <button id="btn-show-all" class="show-more-btn" onclick="toggleFullList()">Show Complete List</button>
+
+        <div id="full-list-container" class="hidden">
+            <div class="section-title">
+                📜 Πλήρης Λίστα
+                <button class="copy-btn" onclick="copyList('full')">Copy</button>
+            </div>
+            <div id="full-list"></div>
+        </div>
+
+        <button onclick="location.reload()" style="margin-top:25px; padding:10px; width:100%; border:none; background:#ccc; border-radius:8px; cursor:pointer;">Νέα Ταξινόμηση</button>
     </div>
 
     <script>
-        // Τα δεδομένα μας
         const characters = [
-            { name: "Γιώργος", img: "images/broskigator.jpg" },
-            { name: "Τάσος", img: "images/kasponti.png" },
+            { name: "Γιώργος", img: "images/default.jpg" },
+            { name: "Τάσος", img: "images/default.jpg" },
             { name: "Νίκος", img: "images/default.jpg" },
             { name: "Γιάννης", img: "images/default.jpg" },
             { name: "Μάνος", img: "images/default.jpg" },
@@ -147,15 +188,11 @@ h1 {
         ];
 
         let sortedList = [];
-        let currentIndex = 0; // Ποιον χαρακτήρα από τους αρχικούς εξετάζουμε
-        let left = 0;
-        let right = 0;
-        let mid = 0;
+        let currentIndex = 1;
+        let left = 0, right = 0, mid = 0;
 
-        // Αρχικοποίηση
         function start() {
             sortedList.push(characters[0]);
-            currentIndex = 1;
             setupNextComparison();
         }
 
@@ -164,18 +201,14 @@ h1 {
                 showResults();
                 return;
             }
-
             if (left > right) {
-                // Βρήκαμε τη θέση! Εισαγωγή στη λίστα
                 sortedList.splice(left, 0, characters[currentIndex]);
                 currentIndex++;
-                // Reset για τον επόμενο χαρακτήρα
                 left = 0;
                 right = sortedList.length - 1;
                 setupNextComparison();
                 return;
             }
-
             mid = Math.floor((left + right) / 2);
             updateUI(characters[currentIndex], sortedList[mid]);
         }
@@ -183,41 +216,54 @@ h1 {
         function updateUI(charA, charB) {
             document.getElementById('name0').innerText = charA.name;
             document.getElementById('img0').src = charA.img;
-            
             document.getElementById('name1').innerText = charB.name;
             document.getElementById('img1').src = charB.img;
         }
 
         function makeChoice(choice) {
-            // Αν διαλέξαμε τον νέο χαρακτήρα (index 0 στο UI), σημαίνει ότι "κερδίζει" αυτόν της λίστας
-            if (choice === 0) {
-                right = mid - 1;
-            } else {
-                left = mid + 1;
-            }
+            if (choice === 0) right = mid - 1;
+            else left = mid + 1;
             setupNextComparison();
         }
 
         function showResults() {
             document.getElementById('game-ui').classList.add('hidden');
-            document.getElementById('question').innerText = "Τέλος!";
-            const resultsDiv = document.getElementById('results');
-            const container = document.getElementById('list-container');
-            resultsDiv.style.display = 'block';
+            document.getElementById('question').innerText = "Η Κατάταξή σου!";
+            document.getElementById('results').style.display = 'block';
+
+            const top5Div = document.getElementById('top5-list');
+            const fullDiv = document.getElementById('full-list');
 
             sortedList.forEach((char, index) => {
-                container.innerHTML += `
+                const itemHtml = `
                     <div class="result-item">
-                        <span><strong>#${index + 1}</strong> ${char.name}</span>
+                        <span class="rank-number">#${index + 1}</span>
+                        <span>${char.name}</span>
                     </div>`;
+                
+                if (index < 5) top5Div.innerHTML += itemHtml;
+                fullDiv.innerHTML += itemHtml;
             });
         }
 
-        // Εκκίνηση
-        left = 0;
-        right = 0; 
-        start();
+        function toggleFullList() {
+            document.getElementById('full-list-container').classList.toggle('hidden');
+            document.getElementById('btn-show-all').classList.add('hidden');
+        }
 
+        function copyList(type) {
+            let text = "";
+            const listToCopy = type === 'top5' ? sortedList.slice(0, 5) : sortedList;
+            const title = type === 'top5' ? "--- MY TOP 5 ---" : "--- FULL LIST ---";
+            
+            text = title + "\n" + listToCopy.map((c, i) => `${i + 1}. ${c.name}`).join("\n");
+
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Αντιγράφηκε στο πρόχειρο!");
+            });
+        }
+
+        start();
     </script>
 </body>
 </html>
