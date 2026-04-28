@@ -8,6 +8,7 @@
         :root {
             --primary: #3498db;
             --pink: #e91e63;
+            --purple: #9b59b6; /* Χρώμα για το Mix */
             --dark: #2c3e50;
             --light: #ecf0f1;
         }
@@ -38,13 +39,14 @@
             align-items: center;
             justify-content: center;
             flex: 1;
-            gap: 20px;
+            gap: 15px;
+            padding: 20px 0;
         }
 
         .menu-btn {
             width: 250px;
-            padding: 25px;
-            font-size: 1.5rem;
+            padding: 20px;
+            font-size: 1.4rem;
             font-weight: bold;
             border: none;
             border-radius: 15px;
@@ -55,11 +57,13 @@
 
         .btn-boys { background-color: var(--primary); }
         .btn-girls { background-color: var(--pink); }
+        .btn-mix { background-color: var(--purple); }
+
         .menu-btn:hover { transform: scale(1.05); opacity: 0.9; }
 
         /* Game UI Styles */
         .comparison-container {
-            display: none; /* Κρυφό μέχρι να γίνει επιλογή */
+            display: none; 
             gap: 15px;
             width: 100%;
             max-width: 1000px;
@@ -129,11 +133,12 @@
 </head>
 <body>
 
-    <h1 id="main-title">Palermo List 123</h1>
+    <h1 id="main-title">Character Ranker</h1>
 
     <div id="menu">
         <button class="menu-btn btn-boys" onclick="initGame('boys')">Αγόρια</button>
         <button class="menu-btn btn-girls" onclick="initGame('girls')">Κορίτσια</button>
+        <button class="menu-btn btn-mix" onclick="initGame('mix')">Mix</button>
     </div>
 
     <div id="game-ui" class="comparison-container">
@@ -166,7 +171,6 @@
     </div>
 
     <script>
-        
         const data = {
             boys: [
                 { name: "Πασχάλης", img: "images/broskigator.jpg" },
@@ -191,7 +195,7 @@
                 { name: "Ηλιάνα", img: "images/iliana.jpg" },
                 { name: "Σταυρούλα", img: "images/skywalker.png" },
                 { name: "Πέννυ", img: "images/penny.jpg" },
-                { name: "Έλένη Κατερίνα", img: "images/elka.jpg" },
+                { name: "Ελένη Κατερίνα", img: "images/elka.jpg" },
                 { name: "Κατερίνα", img: "images/katerinamama.jpg" },
                 { name: "Έμιλυ", img: "images/yuku.jpg" },
                 { name: "Βασιλική", img: "images/morgana.jpg" },
@@ -201,6 +205,9 @@
             ]
         };
 
+        // Δημιουργία της λίστας Mix ενώνοντας τις άλλες δύο
+        data.mix = [...data.boys, ...data.girls];
+
         let currentPool = []; 
         let sortedList = [];
         let currentIndex = 1;
@@ -208,6 +215,10 @@
 
         function initGame(category) {
             currentPool = data[category];
+            
+            // Ανακάτεμα της λίστας για να μην είναι πάντα ίδια η σειρά (ειδικά στο Mix)
+            currentPool.sort(() => Math.random() - 0.5);
+
             document.getElementById('menu').classList.add('hidden');
             document.getElementById('game-ui').style.display = 'flex';
             document.getElementById('main-title').innerText = "Would you rather;";
